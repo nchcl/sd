@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "github.com/nchcl/sd;chat";
+
+message Retail {
+  string id = 1;
+  string producto = 2;
+  string valor = 3;
+  string tienda = 4;
+  string destino = 5;
+}
+
+message Pyme {
+  string id = 1;
+  string producto = 2;
+  string valor = 3;
+  string tienda = 4;
+  string destino = 5;
+  string prioritario = 6;
+}
+
+message Confirmation {
+  string body = 1;
+}
+
+service ChatService {
+  rpc OrderRetail(Retail) returns (Confirmation) {}
+  rpc OrderPyme(Pyme) returns (Confirmation) {}
+}
+

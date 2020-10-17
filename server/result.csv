@@ -1,0 +1,8 @@
+timestamp,id-paquete,tipo,nombre,valor,origen,destino,seguimiento
+2020-10-17 17:53:02,1,prioritario,Secador de pelo,15,pyme,casa-K,130031
+2020-10-17 17:53:04,2,prioritario,Jabón para la ducha,8,pyme,casa-A,130032
+2020-10-17 17:53:06,3,normal,Acondicionador,10,pyme,casa-A,130033
+2020-10-17 17:53:08,4,normal,Shampoo,10,pyme,casa-D,130034
+2020-10-17 17:53:10,5,prioritario,Crema para peinar,8,pyme,casa-E,130035
+2020-10-17 17:53:12,6,prioritario,Placa madre,50,pyme,casa-B,130036
+2020-10-17 17:53:14,7,normal,Procesador R,75,pyme,casa-N,130037
