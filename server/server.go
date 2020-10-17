@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-    fmt.Println("Go gRPC Beginners Tutorial!")
+    fmt.Println("Server on")
 
 	lis, err := net.Listen("tcp", ":9000")
 	if err != nil {
