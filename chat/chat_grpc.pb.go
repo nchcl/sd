@@ -64,6 +64,10 @@ func (s *Server) OrderPyme(ctx context.Context, in *Pyme) (*Confirmation, error)
 	return &Confirmation{Body: fmt.Sprintf("%d", seguimiento)}, nil
 }
 
+func (s *Server) Seguimiento(ctx context.Context, in *Confirmation) (*Confirmation, error) {
+    //var codigo = in.Body
+	return &Confirmation{Body: "EN CONSTRUCCION"}, nil
+}
 
 
 

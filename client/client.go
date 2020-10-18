@@ -7,10 +7,35 @@ import (
     "os"
     "time"
     "fmt"
+    "math/rand"
 
 	"github.com/nchcl/sd/chat"
 	"google.golang.org/grpc"
 )
+
+var codigos []string
+
+func main() {
+    
+    var tipo int
+    var tiempo int
+    
+    fmt.Println("1. Retail")
+    fmt.Println("2. Pyme")
+    fmt.Scan(&tipo)
+    
+    fmt.Println("Tiempo entre ordenes")
+    fmt.Scan(&tiempo)
+
+    
+    switch tipo {
+        case 1:
+            retail(tiempo)
+        case 2:
+            pyme(tiempo)
+    }
+	
+}
 
 func readCsvFile(filePath string) [][]string {
     f, err := os.Open(filePath)
@@ -72,30 +97,26 @@ func pyme(tiempo int) {
             log.Fatalf("Error when calling SayHello: %s", err)
         }
         log.Printf("Response from server: %s", response.Body)
+        codigos = append(codigos, response.Body)
+        //fmt.Println(codigos)
+        
+        if rand.Intn(10) > 4 {
+            
+            response, err := c.Seguimiento(context.Background(), &chat.Confirmation{Body: codigoSeguimiento(codigos)})
+            if err != nil {
+            log.Fatalf("Error when calling SayHello: %s", err)
+            }
+            log.Printf("Response from server: %s", response.Body)
+            
+        }
         
         time.Sleep(time.Duration(tiempo) * time.Second)
     }
     
 }
 
-func main() {
-    
-    var tipo int
-    var tiempo int
-    
-    fmt.Println("1. Retail")
-    fmt.Println("2. Pyme")
-    fmt.Scan(&tipo)
-    
-    fmt.Println("Tiempo entre ordenes")
-    fmt.Scan(&tiempo)
-
-    
-    switch tipo {
-        case 1:
-            retail(tiempo)
-        case 2:
-            pyme(tiempo)
-    }
-	
+func codigoSeguimiento(array []string) string {
+   
+    randomIndex := rand.Intn(len(array))
+    return array[randomIndex]
 }

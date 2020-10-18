@@ -28,5 +28,6 @@ message Confirmation {
 service ChatService {
   rpc OrderRetail(Retail) returns (Confirmation) {}
   rpc OrderPyme(Pyme) returns (Confirmation) {}
+  rpc Seguimiento(Confirmation) returns (Confirmation) {}
 }
 
