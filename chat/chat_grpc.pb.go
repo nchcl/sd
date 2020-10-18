@@ -36,7 +36,7 @@ func (s *Server) OrderRetail(ctx context.Context, in *Retail) (*Confirmation, er
     
     retail = append(retail, []string{fmt.Sprintf("%d",ide),"0","retail",in.Valor,"0","En bodega"})
     
-    fmt.Println(retail[ide-1])
+    //fmt.Println(retail[ide-1])
     
     ide += 1    
 	return &Confirmation{Body: "Orden confirmada"}, nil
@@ -82,7 +82,36 @@ func (s *Server) Seguimiento(ctx context.Context, in *Confirmation) (*Confirmati
 	return &Confirmation{Body: "EN CONSTRUCCION"}, nil
 }
 
+func (s *Server) Camion(ctx context.Context, in *Tipo) (*Paquete, error) {
+    var tipo_camion = in.Tipo
+    var paquete_camion []string
+    
+    if tipo_camion == 1 {
+        if len(retail) == 0 {
+            for i := 0; i < 6; i++ {
+                paquete_camion = append(paquete_camion, "-1")
+            }
+            goto Skip
+        }
+        
+        paquete_camion, retail = retail[0], retail[1:]
 
+    } else {
+        if len(normal) == 0 && len(prioritario) == 0{
+            for i := 0; i < 6; i++ {
+                paquete_camion = append(paquete_camion, "-1")
+            }
+            goto Skip
+        } else if len(prioritario) == 0 {
+            paquete_camion, normal = normal[0], normal[1:]
+        } else {
+            paquete_camion, prioritario = prioritario[0], prioritario[1:]
+        }
+    }
+    
+    Skip:
+	return &Paquete{Idpaquete: paquete_camion[0],Seguimiento: paquete_camion[1],Tipo: paquete_camion[2],Valor: paquete_camion[3],Intentos: paquete_camion[4],Estado: paquete_camion[5]}, nil
+}
 
 func appendCSV(data [][]string) {
     var path = "result.csv"                                                                                                                                                   

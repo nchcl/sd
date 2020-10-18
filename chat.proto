@@ -21,13 +21,27 @@ message Pyme {
   string prioritario = 6;
 }
 
+message Paquete {
+  string idpaquete = 1;
+  string seguimiento = 2;
+  string tipo = 3;
+  string valor = 4;
+  string intentos = 5;
+  string estado = 6;
+}
+
 message Confirmation {
   string body = 1;
+}
+
+message Tipo {
+  int32 tipo = 1;
 }
 
 service ChatService {
   rpc OrderRetail(Retail) returns (Confirmation) {}
   rpc OrderPyme(Pyme) returns (Confirmation) {}
   rpc Seguimiento(Confirmation) returns (Confirmation) {}
+  rpc Camion(Tipo) returns (Paquete) {}
 }
 
