@@ -28,6 +28,8 @@ message Paquete {
   string valor = 4;
   string intentos = 5;
   string estado = 6;
+  string origen = 7;
+  string destino = 8;
 }
 
 message Confirmation {
@@ -43,5 +45,6 @@ service ChatService {
   rpc OrderPyme(Pyme) returns (Confirmation) {}
   rpc Seguimiento(Confirmation) returns (Confirmation) {}
   rpc Camion(Tipo) returns (Paquete) {}
+  //rpc EnvioTerminado(Paquete) returns (Confirmation) {}
 }
 

@@ -3,14 +3,14 @@ package main
 import (
 	"context"
 	"log"
-    "fmt"
+    //"fmt"
 
 	"github.com/nchcl/sd/chat"
 	"google.golang.org/grpc"
 )
 
 func main() {
-    var paquete [6]string
+    var paquete [8]string
     var conn *grpc.ClientConn
 	conn, err := grpc.Dial(":9000", grpc.WithInsecure())
 	if err != nil {
@@ -20,7 +20,7 @@ func main() {
 
     c := chat.NewChatServiceClient(conn)
 	
-    response, err := c.Camion(context.Background(), &chat.Tipo{Tipo: 1})
+    response, err := c.Camion(context.Background(), &chat.Tipo{Tipo: 2})
     if err != nil {
         log.Fatalf("Error when calling SayHello: %s", err)
     }
@@ -30,8 +30,15 @@ func main() {
     paquete[3] = response.Valor
     paquete[4] = response.Intentos
     paquete[5] = response.Estado
+    paquete[6] = response.Origen
+    paquete[7] = response.Destino
     
-    //log.Printf("Response from server: %s", response.Estado)
-    fmt.Println(paquete)
+    log.Printf("Response from server: %s", response)
+    
+    if len(response.Idpaquete) == 0 {
+        log.Printf("henlo")
+    }
+    
+    //fmt.Println(paquete)
     
 }
