@@ -1,0 +1,13 @@
+id-paquete,tipo,valor,origen,destino,intentos,fecha_entrega
+3,retail,110,tienda-C,casa-C,1,19-10-2020 01:47
+2,retail,12,tienda-B,casa-B,1,19-10-2020 01:47
+7,retail,100,tienda-B,casa-Q,2,19-10-2020 01:47
+9,retail,15,tienda-C,casa-A,1,19-10-2020 01:47
+17,retail,120,tienda-B,casa-U,1,19-10-2020 01:47
+15,retail,20,tienda-A,casa-F,1,19-10-2020 01:47
+25,retail,80,tienda-B,casa-A,1,19-10-2020 01:47
+23,retail,6,tienda-C,casa-N,2,19-10-2020 01:47
+33,retail,105,tienda-C,casa-C,1,19-10-2020 01:47
+35,retail,90,tienda-A,casa-S,1,19-10-2020 01:47
+37,retail,115,tienda-B,casa-A,1,19-10-2020 01:47
+40,prioritario,18,pyme,casa-Y,1,19-10-2020 01:47

@@ -96,17 +96,18 @@ func pyme(tiempo int) {
         if err != nil {
             log.Fatalf("Error when calling SayHello: %s", err)
         }
-        log.Printf("Response from server: %s", response.Body)
+        log.Printf("Codigo de seguimiento: %s", response.Body)
         codigos = append(codigos, response.Body)
-        //fmt.Println(codigos)
         
         if rand.Intn(10) > 4 {
+            var codigo = codigoSeguimiento(codigos)
+            log.Printf("Codigo a consultar: %s", codigo)
             
-            response, err := c.Seguimiento(context.Background(), &chat.Confirmation{Body: codigoSeguimiento(codigos)})
+            response, err := c.Seguimiento(context.Background(), &chat.Confirmation{Body: codigo})
             if err != nil {
-            log.Fatalf("Error when calling SayHello: %s", err)
+            log.Fatalf("Error when calling: %s", err)
             }
-            log.Printf("Response from server: %s", response.Body)
+            log.Printf("Estado de la entrega: %s", response.Body)
             
         }
         

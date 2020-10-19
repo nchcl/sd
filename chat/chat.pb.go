@@ -431,7 +431,7 @@ var file_chat_proto_rawDesc = []byte{
 	0x6f, 0x6e, 0x66, 0x69, 0x72, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x62,
 	0x6f, 0x64, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x22,
 	0x1a, 0x0a, 0x04, 0x54, 0x69, 0x70, 0x6f, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x69, 0x70, 0x6f, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x74, 0x69, 0x70, 0x6f, 0x32, 0xcf, 0x01, 0x0a, 0x0b,
+	0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x74, 0x69, 0x70, 0x6f, 0x32, 0x86, 0x02, 0x0a, 0x0b,
 	0x43, 0x68, 0x61, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x31, 0x0a, 0x0b, 0x4f,
 	0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x0c, 0x2e, 0x63, 0x68, 0x61,
 	0x74, 0x2e, 0x52, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x1a, 0x12, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e,
@@ -444,10 +444,13 @@ var file_chat_proto_rawDesc = []byte{
 	0x1a, 0x12, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x72, 0x6d, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x22, 0x00, 0x12, 0x25, 0x0a, 0x06, 0x43, 0x61, 0x6d, 0x69, 0x6f, 0x6e,
 	0x12, 0x0a, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x54, 0x69, 0x70, 0x6f, 0x1a, 0x0d, 0x2e, 0x63,
-	0x68, 0x61, 0x74, 0x2e, 0x50, 0x61, 0x71, 0x75, 0x65, 0x74, 0x65, 0x22, 0x00, 0x42, 0x1a, 0x5a,
-	0x18, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6e, 0x63, 0x68, 0x63,
-	0x6c, 0x2f, 0x73, 0x64, 0x3b, 0x63, 0x68, 0x61, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x68, 0x61, 0x74, 0x2e, 0x50, 0x61, 0x71, 0x75, 0x65, 0x74, 0x65, 0x22, 0x00, 0x12, 0x35, 0x0a,
+	0x0e, 0x45, 0x6e, 0x76, 0x69, 0x6f, 0x54, 0x65, 0x72, 0x6d, 0x69, 0x6e, 0x61, 0x64, 0x6f, 0x12,
+	0x0d, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x50, 0x61, 0x71, 0x75, 0x65, 0x74, 0x65, 0x1a, 0x12,
+	0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x72, 0x6d, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x22, 0x00, 0x42, 0x1a, 0x5a, 0x18, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x6e, 0x63, 0x68, 0x63, 0x6c, 0x2f, 0x73, 0x64, 0x3b, 0x63, 0x68, 0x61, 0x74,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -475,12 +478,14 @@ var file_chat_proto_depIdxs = []int32{
 	1, // 1: chat.ChatService.OrderPyme:input_type -> chat.Pyme
 	3, // 2: chat.ChatService.Seguimiento:input_type -> chat.Confirmation
 	4, // 3: chat.ChatService.Camion:input_type -> chat.Tipo
-	3, // 4: chat.ChatService.OrderRetail:output_type -> chat.Confirmation
-	3, // 5: chat.ChatService.OrderPyme:output_type -> chat.Confirmation
-	3, // 6: chat.ChatService.Seguimiento:output_type -> chat.Confirmation
-	2, // 7: chat.ChatService.Camion:output_type -> chat.Paquete
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	2, // 4: chat.ChatService.EnvioTerminado:input_type -> chat.Paquete
+	3, // 5: chat.ChatService.OrderRetail:output_type -> chat.Confirmation
+	3, // 6: chat.ChatService.OrderPyme:output_type -> chat.Confirmation
+	3, // 7: chat.ChatService.Seguimiento:output_type -> chat.Confirmation
+	2, // 8: chat.ChatService.Camion:output_type -> chat.Paquete
+	3, // 9: chat.ChatService.EnvioTerminado:output_type -> chat.Confirmation
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -589,6 +594,7 @@ type ChatServiceClient interface {
 	OrderPyme(ctx context.Context, in *Pyme, opts ...grpc.CallOption) (*Confirmation, error)
 	Seguimiento(ctx context.Context, in *Confirmation, opts ...grpc.CallOption) (*Confirmation, error)
 	Camion(ctx context.Context, in *Tipo, opts ...grpc.CallOption) (*Paquete, error)
+	EnvioTerminado(ctx context.Context, in *Paquete, opts ...grpc.CallOption) (*Confirmation, error)
 }
 
 type chatServiceClient struct {
@@ -635,12 +641,22 @@ func (c *chatServiceClient) Camion(ctx context.Context, in *Tipo, opts ...grpc.C
 	return out, nil
 }
 
+func (c *chatServiceClient) EnvioTerminado(ctx context.Context, in *Paquete, opts ...grpc.CallOption) (*Confirmation, error) {
+	out := new(Confirmation)
+	err := c.cc.Invoke(ctx, "/chat.ChatService/EnvioTerminado", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatServiceServer is the server API for ChatService service.
 type ChatServiceServer interface {
 	OrderRetail(context.Context, *Retail) (*Confirmation, error)
 	OrderPyme(context.Context, *Pyme) (*Confirmation, error)
 	Seguimiento(context.Context, *Confirmation) (*Confirmation, error)
 	Camion(context.Context, *Tipo) (*Paquete, error)
+	EnvioTerminado(context.Context, *Paquete) (*Confirmation, error)
 }
 
 // UnimplementedChatServiceServer can be embedded to have forward compatible implementations.
@@ -658,6 +674,9 @@ func (*UnimplementedChatServiceServer) Seguimiento(context.Context, *Confirmatio
 }
 func (*UnimplementedChatServiceServer) Camion(context.Context, *Tipo) (*Paquete, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Camion not implemented")
+}
+func (*UnimplementedChatServiceServer) EnvioTerminado(context.Context, *Paquete) (*Confirmation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnvioTerminado not implemented")
 }
 
 func RegisterChatServiceServer(s *grpc.Server, srv ChatServiceServer) {
@@ -736,6 +755,24 @@ func _ChatService_Camion_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ChatService_EnvioTerminado_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Paquete)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).EnvioTerminado(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat.ChatService/EnvioTerminado",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).EnvioTerminado(ctx, req.(*Paquete))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _ChatService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "chat.ChatService",
 	HandlerType: (*ChatServiceServer)(nil),
@@ -755,6 +792,10 @@ var _ChatService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Camion",
 			Handler:    _ChatService_Camion_Handler,
+		},
+		{
+			MethodName: "EnvioTerminado",
+			Handler:    _ChatService_EnvioTerminado_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -45,6 +45,6 @@ service ChatService {
   rpc OrderPyme(Pyme) returns (Confirmation) {}
   rpc Seguimiento(Confirmation) returns (Confirmation) {}
   rpc Camion(Tipo) returns (Paquete) {}
-  //rpc EnvioTerminado(Paquete) returns (Confirmation) {}
+  rpc EnvioTerminado(Paquete) returns (Confirmation) {}
 }
 
