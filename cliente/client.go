@@ -15,6 +15,8 @@ import (
 
 var codigos []string
 
+//Archivo para los clientes de tipo retail y pyme
+
 func main() {
     
     var tipo int
@@ -37,6 +39,7 @@ func main() {
 	
 }
 
+//Funcion para crear un archivo .csv vacio
 func readCsvFile(filePath string) [][]string {
     f, err := os.Open(filePath)
     if err != nil {
@@ -53,10 +56,11 @@ func readCsvFile(filePath string) [][]string {
     return records
 }
 
+//Funcion para realizar pedidos de tipo retail
 func retail(tiempo int) {
     
     var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":9000", grpc.WithInsecure())
+	conn, err := grpc.Dial("dist118:9000", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %s", err)
 	}
@@ -78,10 +82,11 @@ func retail(tiempo int) {
     
 }
 
+//Funcion para realizar pedidos de tipo pyme
 func pyme(tiempo int) {
     
     var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":9000", grpc.WithInsecure())
+	conn, err := grpc.Dial("dist118:9000", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %s", err)
 	}
@@ -116,8 +121,8 @@ func pyme(tiempo int) {
     
 }
 
+//Funcion que elige un codigo de seguimiento aleatorio de un registro de codigos
 func codigoSeguimiento(array []string) string {
-   
     randomIndex := rand.Intn(len(array))
     return array[randomIndex]
 }

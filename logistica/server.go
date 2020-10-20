@@ -11,6 +11,8 @@ import (
 	"google.golang.org/grpc"
 )
 
+//Archivo de logistica, aunque la mayoria de las definiciones estan en el archivo externo "chat_grpc.pb.go"
+
 func main() {
     fmt.Println("Server on")
 
@@ -21,9 +23,6 @@ func main() {
 
 	writeCSV()
 	
-    //var seguimiento *int
-    //seguimiento = new(int)
-    //*seguimiento = 0
 	s := chat.Server{}
 
 	grpcServer := grpc.NewServer()
@@ -36,6 +35,7 @@ func main() {
 	
 }
 
+//Funcion para crear un archivo .csv vacio
 func writeCSV() {
     var data [][]string                                                                                                                                                       
     data = append(data, []string{"timestamp", "id-paquete", "tipo", "nombre","valor","origen","destino",

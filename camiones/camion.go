@@ -13,7 +13,7 @@ import (
 	"google.golang.org/grpc"
 
 )
-
+ //ESTRUCTURAS QUE SE USARAN PARA EL PAQUETE EL ENVIO DE MSJ Y EL CAMION
 type Camion struct{
     id int
     tipo int32
@@ -45,7 +45,7 @@ type message_paquete struct{
     destino string
 }
 
-func writeCSV() {
+func writeCSV() {       //CREA LOS CSV.
     var paquetes_camion_retail_1 [][]string
     var paquetes_camion_retail_2 [][]string
     var paquetes_camion_normal_1 [][]string                                                                                                                                                   
@@ -102,7 +102,7 @@ func writeCSV() {
         }  
     }
 }
-func appendCSV(camion *Camion, nro_paquete int) { 
+func appendCSV(camion *Camion, nro_paquete int) {   //AGREGA LINEAS AL CSV CON SUS RESPECTIVOS ESTADOS
     var path string
     var data [][]string
     if camion.id==1{
@@ -146,10 +146,9 @@ func appendCSV(camion *Camion, nro_paquete int) {
 }
 
 
-func probabilidad_entrega() bool{
+func probabilidad_entrega() bool{   //POSIBILITA LA ENTREGA.
     rand.Seed(time.Now().UTC().UnixNano())
     porcentaje := 1 + rand.Intn(99)
-    fmt.Println("La probabilidad de Entregar es:", porcentaje)
     if porcentaje<=80{
         return true
     } else {
@@ -159,7 +158,7 @@ func probabilidad_entrega() bool{
 }
 
 
-func actualizar_paquete(camion *Camion, estado string, nro_paquete int){
+func actualizar_paquete(camion *Camion, estado string, nro_paquete int){    //ENVIA MENSAJE A LOGISTICA RESPECTO AL PAQUETE Y SU ESTADO
     var mensaje_server message_paquete
     if nro_paquete==1{
         fmt.Println(camion.paquete_1.id, camion.paquete_1.tipo, camion.paquete_1.valor, camion.paquete_1.origen, camion.paquete_1.destino, camion.paquete_1.intentos, camion.paquete_1.fecha_entrega)
@@ -203,7 +202,7 @@ func actualizar_paquete(camion *Camion, estado string, nro_paquete int){
     }
 }
 
-func entregar_paquete_1(camion *Camion, tiempo_envio int){
+func entregar_paquete_1(camion *Camion, tiempo_envio int){ //ENTREGA DEL PRIMER PAQUETE
     camion.paquete_1.intentos=camion.paquete_1.intentos+1
     //actualizar_paquete(camion, "En Camino", 1)
     time.Sleep(time.Duration(tiempo_envio) * time.Second)
@@ -219,6 +218,7 @@ func entregar_paquete_1(camion *Camion, tiempo_envio int){
                     entregar_paquete_2(camion, tiempo_envio)
                     //VOY A ENTREGAR EL OTRO PAQUETE
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 2)
                     return
                     //RETORNO A BODEGA.
                 }
@@ -227,6 +227,7 @@ func entregar_paquete_1(camion *Camion, tiempo_envio int){
                     entregar_paquete_2(camion, tiempo_envio)
                     //VOY A ENTREGAR EL OTRO PAQUETE
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 2)
                     return
                     //RETORNO A BODEGA
                 }
@@ -236,7 +237,6 @@ func entregar_paquete_1(camion *Camion, tiempo_envio int){
             //RETORNO A BODEGA
         }
     }else{
-        actualizar_paquete(camion, "No Recibido", 1)
         // NO FUE ENTREGADO SE SIGUE CON EL SIGUIENTE
         if camion.paquete_2.fecha_entrega=="0"{
             //REVISION DE SI SE ENTREGO
@@ -245,6 +245,7 @@ func entregar_paquete_1(camion *Camion, tiempo_envio int){
                     entregar_paquete_2(camion, tiempo_envio)
                     //VOY A ENTREGAR EL SIGUIENTE PAQUETE
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 2)
                     return
                     //RETORNO A BODEGA
                 }
@@ -253,6 +254,7 @@ func entregar_paquete_1(camion *Camion, tiempo_envio int){
                     entregar_paquete_2(camion, tiempo_envio)
                     //A ENTREGAR EL SIGUIENTE PAQUETE
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 2)
                     return
                     //RETORNO BODEGA
                 }
@@ -263,6 +265,7 @@ func entregar_paquete_1(camion *Camion, tiempo_envio int){
                     entregar_paquete_1(camion, tiempo_envio)
                     //VOY A ENTREGAR EL SIGUIENTE
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 1)
                     return
                     //RETORNO BODEGA
                 }
@@ -271,11 +274,13 @@ func entregar_paquete_1(camion *Camion, tiempo_envio int){
                     entregar_paquete_1(camion, tiempo_envio)
                     //VOY A ENTREGAR EL SIGUIENTE
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 1)
                     return
                     //RETORNO A BODEGA
                 }
             }
         }else{
+            actualizar_paquete(camion, "No Recibido", 1)
             return 
 
             //RETORNO BODEGA
@@ -284,7 +289,7 @@ func entregar_paquete_1(camion *Camion, tiempo_envio int){
 }
 
 
-func entregar_paquete_2(camion *Camion, tiempo_envio int){
+func entregar_paquete_2(camion *Camion, tiempo_envio int){  //ENTREGA DEL SEGUNDO PAQUETE
     camion.paquete_2.intentos=camion.paquete_2.intentos+1
     //actualizar_paquete(camion, "En Camino", 2)
     time.Sleep(time.Duration(tiempo_envio) * time.Second)
@@ -297,12 +302,14 @@ func entregar_paquete_2(camion *Camion, tiempo_envio int){
                 if camion.paquete_1.intentos<3{
                     entregar_paquete_1(camion, tiempo_envio)
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 1)
                     return
                 }
             }else{
                 if camion.paquete_1.intentos*10<=camion.paquete_1.valor && camion.paquete_1.intentos<3{
                     entregar_paquete_1(camion, tiempo_envio)
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 1)
                     return
                 }
             }
@@ -310,18 +317,19 @@ func entregar_paquete_2(camion *Camion, tiempo_envio int){
             return
         }
     }else{
-        actualizar_paquete(camion, "No Recibido", 2)
         if camion.paquete_1.fecha_entrega=="0"{
             if camion.paquete_1.tipo=="retail"{
                 if camion.paquete_1.intentos<3{
                     entregar_paquete_1(camion, tiempo_envio)
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 1)
                     return
                 }
             }else{
                 if camion.paquete_1.intentos*10<=camion.paquete_1.valor && camion.paquete_1.intentos<3{
                     entregar_paquete_1(camion, tiempo_envio)
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 1)
                     return
                 }
             }
@@ -330,16 +338,19 @@ func entregar_paquete_2(camion *Camion, tiempo_envio int){
                 if camion.paquete_2.intentos<3{
                     entregar_paquete_2(camion, tiempo_envio)
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 2)
                     return
                 }
             }else{
                 if camion.paquete_2.intentos*10<=camion.paquete_2.valor && camion.paquete_2.intentos<3{
                     entregar_paquete_2(camion, tiempo_envio)
                 }else{
+                    actualizar_paquete(camion, "No Recibido", 2)
                     return
                 }
             }
         }else{
+            actualizar_paquete(camion, "No Recibido", 2)
             return 
         }
     }
@@ -347,7 +358,7 @@ func entregar_paquete_2(camion *Camion, tiempo_envio int){
 
 
 
-func inter_entrega(camion *Camion, tiempo_envio int) {
+func inter_entrega(camion *Camion, tiempo_envio int) { //FILTRO DE CUAL SE ENTREGA PRIMERO Y SE AGREGA AL CSV
     //Debo enviar aviso de EN CAMINO.
     //for camion.cantidad_paquetes!=0{
     if camion.paquete_1.id!=""{
@@ -366,7 +377,7 @@ func inter_entrega(camion *Camion, tiempo_envio int) {
     //}
 }
 
-func solicitar_paquete(conexion *grpc.ClientConn, camion *Camion) Paquete{
+func solicitar_paquete(conexion *grpc.ClientConn, camion *Camion) Paquete{ //SOLICITUD DE PAQUETES
     c := chat.NewChatServiceClient(conexion)
     response, err := c.Camion(context.Background(), &chat.Tipo{Tipo: camion.tipo})
     if err != nil {
@@ -395,7 +406,7 @@ func solicitar_paquete(conexion *grpc.ClientConn, camion *Camion) Paquete{
     }
 }
 
-func espera_paquetes(camion *Camion ,tiempo_espera int, tiempo_envio int, conexion *grpc.ClientConn) {
+func espera_paquetes(camion *Camion ,tiempo_espera int, tiempo_envio int, conexion *grpc.ClientConn) { //ESPERA DE PAQUETES
     //Primero espera la llegada de los paquetes
     for{
         camion.paquete_1 = solicitar_paquete(conexion, camion) 
@@ -409,9 +420,9 @@ func espera_paquetes(camion *Camion ,tiempo_espera int, tiempo_envio int, conexi
 var ptr **grpc.ClientConn
 
 func main() {
-    writeCSV()
-    var conn *grpc.ClientConn
-    conn, err := grpc.Dial(":9000", grpc.WithInsecure())
+    writeCSV() //CREA CSV
+    var conn *grpc.ClientConn 
+    conn, err := grpc.Dial("dist118:9000", grpc.WithInsecure()) //CONEXION GRPC
     if err != nil {
         log.Fatalf("did not connect: %s", err)
     }
@@ -421,25 +432,25 @@ func main() {
 
     var tiempo int
     var tiempo_envio int
-    camion_retail_1 := &Camion{
-        id: 1 ,//paquete.Get_id()
-        tipo: 1, //paquete.Get_tipo()
-        paquete_1: Paquete{}, //paquete.Get_valor()
-        paquete_2: Paquete{}, //paquete.Get_origen()
+    camion_retail_1 := &Camion{     //CREACION DE CAMIONES
+        id: 1 ,
+        tipo: 1, 
+        paquete_1: Paquete{}, 
+        paquete_2: Paquete{},
         cantidad_paquetes: 0,
     }
     camion_retail_2 := &Camion{
-        id: 2 ,//paquete.Get_id()
-        tipo: 1, //paquete.Get_tipo()
-        paquete_1: Paquete{}, //paquete.Get_valor()
-        paquete_2: Paquete{}, //paquete.Get_origen()
+        id: 2 ,
+        tipo: 1, 
+        paquete_1: Paquete{}, 
+        paquete_2: Paquete{}, 
         cantidad_paquetes: 0,
     }
     camion_normal_1 := &Camion{
-        id: 3 ,//paquete.Get_id()
-        tipo: 2, //paquete.Get_tipo()
-        paquete_1: Paquete{}, //paquete.Get_valor()
-        paquete_2: Paquete{}, //paquete.Get_origen()
+        id: 3 ,
+        tipo: 2, 
+        paquete_1: Paquete{}, 
+        paquete_2: Paquete{}, 
         cantidad_paquetes: 0,
     }
 
@@ -454,26 +465,4 @@ func main() {
     go espera_paquetes(camion_retail_1, tiempo, tiempo_envio, conn)
     go espera_paquetes(camion_retail_2, tiempo, tiempo_envio, conn)
     espera_paquetes(camion_normal_1, tiempo, tiempo_envio, conn)
-    /*for i := 0; i < 3; i++ {
-        if i==0{
-            go espera_paquetes(camion_retail_1, tiempo, tiempo_envio, conn)
-        }else if i==1{
-            go espera_paquetes(camion_retail_2, tiempo, tiempo_envio, conn)
-        }else{
-            go espera_paquetes(camion_normal_1, tiempo, tiempo_envio, conn)
-        }
-    }
-    /*go func(){
-        for{
-            espera_paquetes(camion_normal_1, tiempo, conn2)
-        }
-    }()
-    /*
-    switch tipo {
-        case 1:
-            retail(tiempo)
-        case 2:
-            pyme(tiempo)
-    }
-*/	
 }
