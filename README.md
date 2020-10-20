@@ -12,6 +12,8 @@ Consideraciones generales:
 
 Sistema logistico:
     Instruccions:
+        * Ingresar a la Maquina Virtual dist118
+        * Ingresar a la siguiente ruta "cd Logistica/sd/logistica"
         * Iniciar el sistema corriendo el archivo makefile escribiendo "make" en la consola.
         * Iniciar el resto de los sistemas
         
@@ -20,6 +22,8 @@ Sistema logistico:
 
 Cliente:
     Instruccions:
+        * Ingresar a la Maquina Virtual dist120
+        * Ingresar a la siguiente ruta "cd Cliente/sd/cliente"
         * Iniciar el sistema corriendo el archivo makefile escribiendo "make" en la consola.
         * Ingresar el tiempo de espera entre paquetes en segundos (1,2,3,...)
         * Ingresar el tiempo que demora un envio en segundos (1,2,3,...)
@@ -29,6 +33,8 @@ Cliente:
         
 Camiones:
     Instruccions:
+        * Ingresar a la Maquina Virtual dist119
+        * Ingresar a la siguiente ruta "cd Camion/sd/camiones"
         * Iniciar el sistema corriendo el archivo makefile escribiendo "make" en la consola.
         * Ingresar el tipo de cliente, "1" para "Retail" y "2" para "Pyme"
         * Ingresar el tiempo entre pedidos en segundos (1,2,3,...)
@@ -39,6 +45,8 @@ Camiones:
         
 Financiero:
     Instruccions:
+        * Ingresar a la Maquina Virtual dist117
+        * Ingresar a la siguiente ruta "cd Finanzas/sd/finanzas"
         * Iniciar el sistema corriendo el archivo makefile escribiendo "make" en la consola.
     
     Consideraciones:
